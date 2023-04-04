@@ -1,7 +1,8 @@
 from aws_cdk import (
-    # Duration,
     Stack,
-    # aws_sqs as sqs,
+    aws_apigateway as api_gw,
+    aws_lambda as awslambda,
+    CfnOutput,
 )
 from constructs import Construct
 
@@ -10,10 +11,15 @@ class JackPotStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        # The code that defines your stack goes here
+        lambda_five = awslambda.Function(self, "LambdaForFive", runtime=awslambda.Runtime.PYTHON_3_8, handler="index.handler", code= awslambda.Code.from_asset(('script-five')))
+        Lambda_euro = awslambda.Function(self, "LambdaForEuro", runtime=awslambda.Runtime.PYTHON_3_8, handler="index.handler", code= awslambda.Code.from_asset(('script-euro')))
 
-        # example resource
-        # queue = sqs.Queue(
-        #     self, "JackPotQueue",
-        #     visibility_timeout=Duration.seconds(300),
-        # )
+        api = api_gw.RestApi(self, "MYApi", rest_api_name="Hululu", description="aaaaaaaaaa", endpoint_types=[api_gw.EndpointType.REGIONAL])
+
+        resoruce_five = api.root.add_resource("resoruce_five")
+        five_integration = api_gw.LambdaIntegration(lambda_five)
+        resoruce_five.add_method("GET", five_integration)
+        
+        resoruce_euro = api.root.add_resource("resoruce_euro")
+        euro_integration = api_gw.LambdaIntegration(Lambda_euro)
+        resoruce_euro.add_method("GET", euro_integration)
