@@ -23,3 +23,6 @@ class JackPotStack(Stack):
         resoruce_euro = api.root.add_resource("resoruce_euro")
         euro_integration = api_gw.LambdaIntegration(Lambda_euro)
         resoruce_euro.add_method("GET", euro_integration)
+
+        CfnOutput(self, "LambdaFiveURL", value=f"https://{api.rest_api_id}.execute-api.{Stack.of(self).region}.amazonaws.com/prod/resoruce_five")
+        CfnOutput(self, "LambdaEuroURL", value=f"https://{api.rest_api_id}.execute-api.{Stack.of(self).region}.amazonaws.com/prod/resoruce_euro")
