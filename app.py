@@ -7,6 +7,6 @@ from jack_pot.jack_pot_stack import JackPotStack
 
 
 app = cdk.App()
-JackPotStack(app, "JackPotStack-hulu")
+JackPotStack(app, "JackPotStack")
 
 app.synth()
