@@ -26,7 +26,7 @@ class JackPotStack(Stack):
         euro_integration = api_gw.LambdaIntegration(Lambda_euro)
         resoruce_euro.add_method("GET", euro_integration)
 
-        resoruce_price = api.root.add_resource("resoruce_euro")
+        resoruce_price = api.root.add_resource("resoruce_price")
         price_integration = api_gw.LambdaIntegration(guess_what_another_lambda)
         resoruce_price.add_method("GET", price_integration)
 
