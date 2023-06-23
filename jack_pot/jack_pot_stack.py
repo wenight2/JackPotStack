@@ -14,7 +14,7 @@ class JackPotStack(Stack):
         lambda_five = awslambda.Function(self, "LambdaForFive", runtime=awslambda.Runtime.PYTHON_3_8, handler="index.handler", code= awslambda.Code.from_asset(('script-five')))
         Lambda_euro = awslambda.Function(self, "LambdaForEuro", runtime=awslambda.Runtime.PYTHON_3_8, handler="index.handler", code= awslambda.Code.from_asset(('script-euro')))
 
-        guess_what_another_lambda = awslambda.Function(self, "LambdaForFive", runtime=awslambda.Runtime.PYTHON_3_8, handler="index.handler", code= awslambda.Code.from_asset(('prices')))
+        guess_what_another_lambda = awslambda.Function(self, "LambdaPrices", runtime=awslambda.Runtime.PYTHON_3_8, handler="index.handler", code= awslambda.Code.from_asset(('prices')))
 
         api = api_gw.RestApi(self, "MYApi", rest_api_name="Hululu", description="aaaaaaaaaa", endpoint_types=[api_gw.EndpointType.REGIONAL])
 
